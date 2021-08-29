@@ -35,6 +35,7 @@ TOKEN :
 | < DOT: "." >
 | < ASSIGN: "=" >
 | < NE: "!=" >
+| < INCREMENT: "++" >
 | < PLUS: "+" >
 | < MINUS: "-" >
 | < MULTIPLY: "*" >
@@ -262,6 +263,7 @@ void Statement() :
 |
   WhileStatement()
 |
+  LOOKAHEAD(50)
   ForStatement()
 |
   PrintStatement()
@@ -318,7 +320,7 @@ void WhileStatement() :
 void ForStatement() :
 {}
 {
-  "for" "(" FormalParameter() "=" Expression() ";" Expression() ";" Statement() ")" "{"  (Statement())*  "}" 
+  "for" "(" FormalParameter() "=" Expression() ";" Expression() ";" Identifier() "++" ")" "{"  (Statement())*  "}" 
 }
 void PrintStatement() :
 {}

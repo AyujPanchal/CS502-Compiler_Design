@@ -391,11 +391,12 @@ public class GJVoidDepthFirst<A> implements GJVoidVisitor<A> {
     * f5 -> ";"
     * f6 -> Expression()
     * f7 -> ";"
-    * f8 -> Statement()
-    * f9 -> ")"
-    * f10 -> "{"
-    * f11 -> ( Statement() )*
-    * f12 -> "}"
+    * f8 -> Identifier()
+    * f9 -> "++"
+    * f10 -> ")"
+    * f11 -> "{"
+    * f12 -> ( Statement() )*
+    * f13 -> "}"
     */
    public void visit(ForStatement n, A argu) {
       n.f0.accept(this, argu);
@@ -411,6 +412,7 @@ public class GJVoidDepthFirst<A> implements GJVoidVisitor<A> {
       n.f10.accept(this, argu);
       n.f11.accept(this, argu);
       n.f12.accept(this, argu);
+      n.f13.accept(this, argu);
    }
 
    /**

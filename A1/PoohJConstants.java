@@ -35,73 +35,75 @@ public interface PoohJConstants {
   /** RegularExpression Id. */
   int NE = 18;
   /** RegularExpression Id. */
-  int PLUS = 19;
+  int INCREMENT = 19;
   /** RegularExpression Id. */
-  int MINUS = 20;
+  int PLUS = 20;
   /** RegularExpression Id. */
-  int MULTIPLY = 21;
+  int MINUS = 21;
   /** RegularExpression Id. */
-  int DIVIDE = 22;
+  int MULTIPLY = 22;
   /** RegularExpression Id. */
-  int AND = 23;
+  int DIVIDE = 23;
   /** RegularExpression Id. */
-  int CLASS = 24;
+  int AND = 24;
   /** RegularExpression Id. */
-  int ELSE = 25;
+  int CLASS = 25;
   /** RegularExpression Id. */
-  int FALSE = 26;
+  int ELSE = 26;
   /** RegularExpression Id. */
-  int OR = 27;
+  int FALSE = 27;
   /** RegularExpression Id. */
-  int LTE = 28;
+  int OR = 28;
   /** RegularExpression Id. */
-  int IF = 29;
+  int LTE = 29;
   /** RegularExpression Id. */
-  int WHILE = 30;
+  int IF = 30;
   /** RegularExpression Id. */
-  int FOR = 31;
+  int WHILE = 31;
   /** RegularExpression Id. */
-  int INTEGER = 32;
+  int FOR = 32;
   /** RegularExpression Id. */
-  int FLOAT = 33;
+  int INTEGER = 33;
   /** RegularExpression Id. */
-  int LENGTH = 34;
+  int FLOAT = 34;
   /** RegularExpression Id. */
-  int BOOLEAN = 35;
+  int LENGTH = 35;
   /** RegularExpression Id. */
-  int MAIN = 36;
+  int BOOLEAN = 36;
   /** RegularExpression Id. */
-  int NEW = 37;
+  int MAIN = 37;
   /** RegularExpression Id. */
-  int PUBLIC = 38;
+  int NEW = 38;
   /** RegularExpression Id. */
-  int RETURN = 39;
+  int PUBLIC = 39;
   /** RegularExpression Id. */
-  int STATIC = 40;
+  int RETURN = 40;
   /** RegularExpression Id. */
-  int INHERITANCE = 41;
+  int STATIC = 41;
   /** RegularExpression Id. */
-  int STRING = 42;
+  int INHERITANCE = 42;
   /** RegularExpression Id. */
-  int THIS = 43;
+  int STRING = 43;
   /** RegularExpression Id. */
-  int TRUE = 44;
+  int THIS = 44;
   /** RegularExpression Id. */
-  int PRINT = 45;
+  int TRUE = 45;
   /** RegularExpression Id. */
-  int VOID = 46;
+  int PRINT = 46;
   /** RegularExpression Id. */
-  int INTEGER_LITERAL = 47;
+  int VOID = 47;
   /** RegularExpression Id. */
-  int FLOAT_LITERAL = 48;
+  int INTEGER_LITERAL = 48;
   /** RegularExpression Id. */
-  int EXPONENT = 49;
+  int FLOAT_LITERAL = 49;
   /** RegularExpression Id. */
-  int IDENTIFIER = 50;
+  int EXPONENT = 50;
   /** RegularExpression Id. */
-  int LETTER = 51;
+  int IDENTIFIER = 51;
   /** RegularExpression Id. */
-  int DIGIT = 52;
+  int LETTER = 52;
+  /** RegularExpression Id. */
+  int DIGIT = 53;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -127,6 +129,7 @@ public interface PoohJConstants {
     "\".\"",
     "\"=\"",
     "\"!=\"",
+    "\"++\"",
     "\"+\"",
     "\"-\"",
     "\"*\"",

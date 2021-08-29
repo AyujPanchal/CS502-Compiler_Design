@@ -286,7 +286,7 @@ public class PoohJ implements PoohJConstants {
     label_5:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 53:
+      case 54:
         ;
         break;
       default:
@@ -314,7 +314,7 @@ public class PoohJ implements PoohJConstants {
    NodeToken n0;
    Token n1;
    FormalParameter n2;
-    n1 = jj_consume_token(53);
+    n1 = jj_consume_token(54);
             n0 = JTBToolkit.makeNodeToken(n1);
     n2 = FormalParameter();
      {if (true) return new FormalParameterRest(n0,n2);}
@@ -439,18 +439,23 @@ public class PoohJ implements PoohJConstants {
           n6 = WhileStatement();
         n0 = new NodeChoice(n6, 5);
           break;
-        case FOR:
-          n7 = ForStatement();
-        n0 = new NodeChoice(n7, 6);
-          break;
-        case PRINT:
-          n8 = PrintStatement();
-        n0 = new NodeChoice(n8, 7);
-          break;
         default:
           jj_la1[7] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
+          if (jj_2_8(50)) {
+            n7 = ForStatement();
+        n0 = new NodeChoice(n7, 6);
+          } else {
+            switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+            case PRINT:
+              n8 = PrintStatement();
+        n0 = new NodeChoice(n8, 7);
+              break;
+            default:
+              jj_la1[8] = jj_gen;
+              jj_consume_token(-1);
+              throw new ParseException();
+            }
+          }
         }
       }
     }
@@ -479,7 +484,7 @@ public class PoohJ implements PoohJConstants {
         ;
         break;
       default:
-        jj_la1[8] = jj_gen;
+        jj_la1[9] = jj_gen;
         break label_6;
       }
       n3 = Statement();
@@ -506,7 +511,7 @@ public class PoohJ implements PoohJConstants {
     n3 = Expression();
     label_7:
     while (true) {
-      if (jj_2_8(2)) {
+      if (jj_2_9(2)) {
         ;
       } else {
         break label_7;
@@ -544,7 +549,7 @@ public class PoohJ implements PoohJConstants {
     n8 = Expression();
     label_8:
     while (true) {
-      if (jj_2_9(2)) {
+      if (jj_2_10(2)) {
         ;
       } else {
         break label_8;
@@ -576,7 +581,7 @@ public class PoohJ implements PoohJConstants {
             n4 = JTBToolkit.makeNodeToken(n5);
     label_9:
     while (true) {
-      if (jj_2_10(2)) {
+      if (jj_2_11(2)) {
         ;
       } else {
         break label_9;
@@ -594,7 +599,7 @@ public class PoohJ implements PoohJConstants {
    NodeChoice n0;
    IfthenElseStatement n1;
    IfthenStatement n2;
-    if (jj_2_11(2147483647)) {
+    if (jj_2_12(2147483647)) {
       n1 = IfthenElseStatement();
         n0 = new NodeChoice(n1, 0);
     } else {
@@ -604,7 +609,7 @@ public class PoohJ implements PoohJConstants {
         n0 = new NodeChoice(n2, 1);
         break;
       default:
-        jj_la1[9] = jj_gen;
+        jj_la1[10] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -696,15 +701,17 @@ public class PoohJ implements PoohJConstants {
    Expression n10;
    NodeToken n11;
    Token n12;
-   Statement n13;
+   Identifier n13;
    NodeToken n14;
    Token n15;
    NodeToken n16;
    Token n17;
-   NodeListOptional n18 = new NodeListOptional();
-   Statement n19;
-   NodeToken n20;
-   Token n21;
+   NodeToken n18;
+   Token n19;
+   NodeListOptional n20 = new NodeListOptional();
+   Statement n21;
+   NodeToken n22;
+   Token n23;
     n1 = jj_consume_token(FOR);
               n0 = JTBToolkit.makeNodeToken(n1);
     n3 = jj_consume_token(LPAREN);
@@ -718,11 +725,13 @@ public class PoohJ implements PoohJConstants {
     n10 = Expression();
     n12 = jj_consume_token(SEMICOLON);
              n11 = JTBToolkit.makeNodeToken(n12);
-    n13 = Statement();
-    n15 = jj_consume_token(RPAREN);
-             n14 = JTBToolkit.makeNodeToken(n15);
-    n17 = jj_consume_token(LBRACE);
+    n13 = Identifier();
+    n15 = jj_consume_token(INCREMENT);
+              n14 = JTBToolkit.makeNodeToken(n15);
+    n17 = jj_consume_token(RPAREN);
              n16 = JTBToolkit.makeNodeToken(n17);
+    n19 = jj_consume_token(LBRACE);
+             n18 = JTBToolkit.makeNodeToken(n19);
     label_10:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -735,16 +744,16 @@ public class PoohJ implements PoohJConstants {
         ;
         break;
       default:
-        jj_la1[10] = jj_gen;
+        jj_la1[11] = jj_gen;
         break label_10;
       }
-      n19 = Statement();
-        n18.addNode(n19);
+      n21 = Statement();
+        n20.addNode(n21);
     }
-     n18.nodes.trimToSize();
-    n21 = jj_consume_token(RBRACE);
-             n20 = JTBToolkit.makeNodeToken(n21);
-     {if (true) return new ForStatement(n0,n2,n4,n5,n7,n8,n10,n11,n13,n14,n16,n18,n20);}
+     n20.nodes.trimToSize();
+    n23 = jj_consume_token(RBRACE);
+             n22 = JTBToolkit.makeNodeToken(n23);
+     {if (true) return new ForStatement(n0,n2,n4,n5,n7,n8,n10,n11,n13,n14,n16,n18,n20,n22);}
     throw new Error("Missing return statement in function");
   }
 
@@ -784,34 +793,34 @@ public class PoohJ implements PoohJConstants {
    MessageSend n9;
    LengthExpression n10;
    PrimaryExpression n11;
-    if (jj_2_12(2147483647)) {
+    if (jj_2_13(2147483647)) {
       n1 = AndExpression();
         n0 = new NodeChoice(n1, 0);
-    } else if (jj_2_13(2147483647)) {
+    } else if (jj_2_14(2147483647)) {
       n2 = NeqExpression();
         n0 = new NodeChoice(n2, 1);
-    } else if (jj_2_14(2147483647)) {
+    } else if (jj_2_15(2147483647)) {
       n3 = PlusExpression();
         n0 = new NodeChoice(n3, 2);
-    } else if (jj_2_15(2147483647)) {
+    } else if (jj_2_16(2147483647)) {
       n4 = MinusExpression();
         n0 = new NodeChoice(n4, 3);
-    } else if (jj_2_16(2147483647)) {
+    } else if (jj_2_17(2147483647)) {
       n5 = MultiplyExpression();
         n0 = new NodeChoice(n5, 4);
-    } else if (jj_2_17(2147483647)) {
+    } else if (jj_2_18(2147483647)) {
       n6 = DivideExpression();
         n0 = new NodeChoice(n6, 5);
-    } else if (jj_2_18(2147483647)) {
+    } else if (jj_2_19(2147483647)) {
       n7 = OrExpression();
         n0 = new NodeChoice(n7, 6);
-    } else if (jj_2_19(2147483647)) {
+    } else if (jj_2_20(2147483647)) {
       n8 = CompareExpression();
         n0 = new NodeChoice(n8, 7);
-    } else if (jj_2_20(2147483647)) {
+    } else if (jj_2_21(2147483647)) {
       n9 = MessageSend();
         n0 = new NodeChoice(n9, 8);
-    } else if (jj_2_21(50)) {
+    } else if (jj_2_22(50)) {
       n10 = LengthExpression();
         n0 = new NodeChoice(n10, 9);
     } else {
@@ -829,12 +838,12 @@ public class PoohJ implements PoohJConstants {
       case INTEGER_LITERAL:
       case FLOAT_LITERAL:
       case IDENTIFIER:
-      case 54:
+      case 55:
         n11 = PrimaryExpression();
         n0 = new NodeChoice(n11, 10);
         break;
       default:
-        jj_la1[11] = jj_gen;
+        jj_la1[12] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -978,12 +987,12 @@ public class PoohJ implements PoohJConstants {
     case INTEGER_LITERAL:
     case FLOAT_LITERAL:
     case IDENTIFIER:
-    case 54:
+    case 55:
       n7 = ExpressionList();
         n6.addNode(n7);
       break;
     default:
-      jj_la1[12] = jj_gen;
+      jj_la1[13] = jj_gen;
       ;
     }
     n9 = jj_consume_token(RPAREN);
@@ -1015,11 +1024,11 @@ public class PoohJ implements PoohJConstants {
     label_11:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 53:
+      case 54:
         ;
         break;
       default:
-        jj_la1[13] = jj_gen;
+        jj_la1[14] = jj_gen;
         break label_11;
       }
       n2 = ExpressionRest();
@@ -1034,7 +1043,7 @@ public class PoohJ implements PoohJConstants {
    NodeToken n0;
    Token n1;
    Expression n2;
-    n1 = jj_consume_token(53);
+    n1 = jj_consume_token(54);
             n0 = JTBToolkit.makeNodeToken(n1);
     n2 = Expression();
      {if (true) return new ExpressionRest(n0,n2);}
@@ -1053,7 +1062,7 @@ public class PoohJ implements PoohJConstants {
    AllocationExpression n8;
    NotExpression n9;
    BracketExpression n10;
-    if (jj_2_22(3)) {
+    if (jj_2_23(3)) {
       n1 = IntegerLiteral();
         n0 = new NodeChoice(n1, 0);
     } else {
@@ -1071,8 +1080,8 @@ public class PoohJ implements PoohJConstants {
         n0 = new NodeChoice(n4, 3);
         break;
       default:
-        jj_la1[14] = jj_gen;
-        if (jj_2_23(3)) {
+        jj_la1[15] = jj_gen;
+        if (jj_2_24(3)) {
           n5 = Identifier();
         n0 = new NodeChoice(n5, 4);
         } else {
@@ -1082,8 +1091,8 @@ public class PoohJ implements PoohJConstants {
         n0 = new NodeChoice(n6, 5);
             break;
           default:
-            jj_la1[15] = jj_gen;
-            if (jj_2_24(3)) {
+            jj_la1[16] = jj_gen;
+            if (jj_2_25(3)) {
               n7 = ArrayAllocationExpression();
         n0 = new NodeChoice(n7, 6);
             } else {
@@ -1092,7 +1101,7 @@ public class PoohJ implements PoohJConstants {
                 n8 = AllocationExpression();
         n0 = new NodeChoice(n8, 7);
                 break;
-              case 54:
+              case 55:
                 n9 = NotExpression();
         n0 = new NodeChoice(n9, 8);
                 break;
@@ -1101,7 +1110,7 @@ public class PoohJ implements PoohJConstants {
         n0 = new NodeChoice(n10, 9);
                 break;
               default:
-                jj_la1[16] = jj_gen;
+                jj_la1[17] = jj_gen;
                 jj_consume_token(-1);
                 throw new ParseException();
               }
@@ -1135,7 +1144,7 @@ public class PoohJ implements PoohJConstants {
         n0 = new NodeChoice(n3, 1);
       break;
     default:
-      jj_la1[17] = jj_gen;
+      jj_la1[18] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1234,7 +1243,7 @@ public class PoohJ implements PoohJConstants {
    NodeToken n0;
    Token n1;
    Expression n2;
-    n1 = jj_consume_token(54);
+    n1 = jj_consume_token(55);
             n0 = JTBToolkit.makeNodeToken(n1);
     n2 = Expression();
      {if (true) return new NotExpression(n0,n2);}
@@ -1264,11 +1273,11 @@ public class PoohJ implements PoohJConstants {
     label_12:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 53:
+      case 54:
         ;
         break;
       default:
-        jj_la1[18] = jj_gen;
+        jj_la1[19] = jj_gen;
         break label_12;
       }
       n2 = IdentifierRest();
@@ -1283,7 +1292,7 @@ public class PoohJ implements PoohJConstants {
    NodeToken n0;
    Token n1;
    Identifier n2;
-    n1 = jj_consume_token(53);
+    n1 = jj_consume_token(54);
             n0 = JTBToolkit.makeNodeToken(n1);
     n2 = Identifier();
      {if (true) return new IdentifierRest(n0,n2);}
@@ -1458,175 +1467,174 @@ public class PoohJ implements PoohJConstants {
     finally { jj_save(23, xla); }
   }
 
-  static private boolean jj_3R_79() {
+  static private boolean jj_2_25(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_25(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(24, xla); }
+  }
+
+  static private boolean jj_3R_20() {
     if (jj_scan_token(FOR)) return true;
     if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_85()) return true;
+    if (jj_3R_29()) return true;
     if (jj_scan_token(ASSIGN)) return true;
-    if (jj_3R_27()) return true;
-    if (jj_scan_token(SEMICOLON)) return true;
-    if (jj_3R_27()) return true;
+    if (jj_3R_28()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     if (jj_3R_28()) return true;
+    if (jj_scan_token(SEMICOLON)) return true;
+    if (jj_3R_23()) return true;
+    if (jj_scan_token(INCREMENT)) return true;
     if (jj_scan_token(RPAREN)) return true;
     if (jj_scan_token(LBRACE)) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_86()) { jj_scanpos = xsp; break; }
+      if (jj_3R_30()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(RBRACE)) return true;
     return false;
   }
 
-  static private boolean jj_3_8() {
+  static private boolean jj_3R_73() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(MULTIPLY)) return true;
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_38() {
+    if (jj_3R_65()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_9() {
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_71() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(MULTIPLY)) return true;
-    if (jj_3R_21()) return true;
+  static private boolean jj_3R_37() {
+    if (jj_3R_64()) return true;
     return false;
   }
 
-  static private boolean jj_3R_35() {
+  static private boolean jj_3R_36() {
     if (jj_3R_63()) return true;
     return false;
   }
 
-  static private boolean jj_3R_34() {
-    if (jj_3R_62()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_17() {
-    if (jj_3R_22()) return true;
+    if (jj_3R_23()) return true;
     if (jj_scan_token(ASSIGN)) return true;
-    if (jj_3R_27()) return true;
+    if (jj_3R_28()) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_8()) { jj_scanpos = xsp; break; }
+      if (jj_3_9()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  static private boolean jj_3R_33() {
-    if (jj_3R_61()) return true;
+  static private boolean jj_3_25() {
+    if (jj_3R_26()) return true;
     return false;
   }
 
-  static private boolean jj_3R_85() {
-    if (jj_3R_26()) return true;
+  static private boolean jj_3R_29() {
+    if (jj_3R_27()) return true;
+    if (jj_3R_23()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_35() {
+    if (jj_3R_62()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_72() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(MINUS)) return true;
     if (jj_3R_22()) return true;
     return false;
   }
 
   static private boolean jj_3_24() {
-    if (jj_3R_25()) return true;
+    if (jj_3R_23()) return true;
     return false;
   }
 
-  static private boolean jj_3R_32() {
+  static private boolean jj_3R_34() {
+    if (jj_3R_61()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_33() {
     if (jj_3R_60()) return true;
     return false;
   }
 
-  static private boolean jj_3R_70() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(MINUS)) return true;
-    if (jj_3R_21()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_23() {
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_31() {
+  static private boolean jj_3R_32() {
     if (jj_3R_59()) return true;
     return false;
   }
 
-  static private boolean jj_3R_30() {
-    if (jj_3R_58()) return true;
+  static private boolean jj_3R_83() {
+    if (jj_3R_31()) return true;
     return false;
   }
 
-  static private boolean jj_3R_82() {
+  static private boolean jj_3R_65() {
+    if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_28()) return true;
+    if (jj_scan_token(RPAREN)) return true;
     return false;
   }
 
-  static private boolean jj_3R_29() {
-    if (jj_3R_57()) return true;
+  static private boolean jj_3_23() {
+    if (jj_3R_25()) return true;
     return false;
   }
 
-  static private boolean jj_3R_76() {
+  static private boolean jj_3R_78() {
     if (jj_scan_token(LBRACE)) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_82()) { jj_scanpos = xsp; break; }
+      if (jj_3R_83()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(RBRACE)) return true;
     return false;
   }
 
-  static private boolean jj_3R_63() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_27()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_22() {
-    if (jj_3R_24()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_69() {
-    if (jj_3R_21()) return true;
+  static private boolean jj_3R_71() {
+    if (jj_3R_22()) return true;
     if (jj_scan_token(PLUS)) return true;
-    if (jj_3R_21()) return true;
+    if (jj_3R_22()) return true;
     return false;
   }
 
-  static private boolean jj_3R_78() {
-    if (jj_scan_token(WHILE)) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_27()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_28()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_21() {
+  static private boolean jj_3R_22() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_22()) {
-    jj_scanpos = xsp;
-    if (jj_3R_29()) {
-    jj_scanpos = xsp;
-    if (jj_3R_30()) {
-    jj_scanpos = xsp;
-    if (jj_3R_31()) {
-    jj_scanpos = xsp;
     if (jj_3_23()) {
     jj_scanpos = xsp;
     if (jj_3R_32()) {
-    jj_scanpos = xsp;
-    if (jj_3_24()) {
     jj_scanpos = xsp;
     if (jj_3R_33()) {
     jj_scanpos = xsp;
     if (jj_3R_34()) {
     jj_scanpos = xsp;
-    if (jj_3R_35()) return true;
+    if (jj_3_24()) {
+    jj_scanpos = xsp;
+    if (jj_3R_35()) {
+    jj_scanpos = xsp;
+    if (jj_3_25()) {
+    jj_scanpos = xsp;
+    if (jj_3R_36()) {
+    jj_scanpos = xsp;
+    if (jj_3R_37()) {
+    jj_scanpos = xsp;
+    if (jj_3R_38()) return true;
     }
     }
     }
@@ -1639,26 +1647,35 @@ public class PoohJ implements PoohJConstants {
     return false;
   }
 
-  static private boolean jj_3R_56() {
-    if (jj_3R_80()) return true;
+  static private boolean jj_3R_80() {
+    if (jj_scan_token(WHILE)) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_28()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_31()) return true;
     return false;
   }
 
-  static private boolean jj_3R_62() {
-    if (jj_scan_token(54)) return true;
-    if (jj_3R_27()) return true;
+  static private boolean jj_3R_64() {
+    if (jj_scan_token(55)) return true;
+    if (jj_3R_28()) return true;
     return false;
   }
 
-  static private boolean jj_3R_55() {
-    if (jj_3R_79()) return true;
+  static private boolean jj_3R_58() {
+    if (jj_3R_81()) return true;
     return false;
   }
 
-  static private boolean jj_3R_68() {
-    if (jj_3R_21()) return true;
+  static private boolean jj_3R_70() {
+    if (jj_3R_22()) return true;
     if (jj_scan_token(NE)) return true;
-    if (jj_3R_21()) return true;
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_8() {
+    if (jj_3R_20()) return true;
     return false;
   }
 
@@ -1667,19 +1684,19 @@ public class PoohJ implements PoohJConstants {
     return false;
   }
 
-  static private boolean jj_3R_54() {
-    if (jj_3R_78()) return true;
+  static private boolean jj_3R_57() {
+    if (jj_3R_80()) return true;
     return false;
   }
 
-  static private boolean jj_3R_53() {
-    if (jj_3R_77()) return true;
+  static private boolean jj_3R_89() {
+    if (jj_scan_token(54)) return true;
+    if (jj_3R_28()) return true;
     return false;
   }
 
-  static private boolean jj_3R_90() {
-    if (jj_scan_token(53)) return true;
-    if (jj_3R_27()) return true;
+  static private boolean jj_3R_56() {
+    if (jj_3R_79()) return true;
     return false;
   }
 
@@ -1688,14 +1705,22 @@ public class PoohJ implements PoohJConstants {
     return false;
   }
 
-  static private boolean jj_3R_20() {
+  static private boolean jj_3R_21() {
     if (jj_scan_token(IF)) return true;
     if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_27()) return true;
+    if (jj_3R_28()) return true;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_28()) return true;
+    if (jj_3R_31()) return true;
     if (jj_scan_token(ELSE)) return true;
-    if (jj_3R_28()) return true;
+    if (jj_3R_31()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_63() {
+    if (jj_scan_token(NEW)) return true;
+    if (jj_3R_23()) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_scan_token(RPAREN)) return true;
     return false;
   }
 
@@ -1704,11 +1729,10 @@ public class PoohJ implements PoohJConstants {
     return false;
   }
 
-  static private boolean jj_3R_61() {
-    if (jj_scan_token(NEW)) return true;
+  static private boolean jj_3R_69() {
     if (jj_3R_22()) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_scan_token(RPAREN)) return true;
+    if (jj_scan_token(AND)) return true;
+    if (jj_3R_22()) return true;
     return false;
   }
 
@@ -1717,10 +1741,117 @@ public class PoohJ implements PoohJConstants {
     return false;
   }
 
-  static private boolean jj_3R_67() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(AND)) return true;
-    if (jj_3R_21()) return true;
+  static private boolean jj_3R_88() {
+    if (jj_3R_89()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_55() {
+    if (jj_3R_78()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_86() {
+    if (jj_3R_28()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_88()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_31() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_55()) {
+    jj_scanpos = xsp;
+    if (jj_3_5()) {
+    jj_scanpos = xsp;
+    if (jj_3_6()) {
+    jj_scanpos = xsp;
+    if (jj_3_7()) {
+    jj_scanpos = xsp;
+    if (jj_3R_56()) {
+    jj_scanpos = xsp;
+    if (jj_3R_57()) {
+    jj_scanpos = xsp;
+    if (jj_3_8()) {
+    jj_scanpos = xsp;
+    if (jj_3R_58()) return true;
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    return false;
+  }
+
+  static private boolean jj_3_21() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(DOT)) return true;
+    if (jj_3R_23()) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_54() {
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_20() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(LTE)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_22() {
+    if (jj_3R_24()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_26() {
+    if (jj_scan_token(NEW)) return true;
+    if (jj_scan_token(INTEGER)) return true;
+    if (jj_scan_token(LSQPAREN)) return true;
+    if (jj_3R_28()) return true;
+    if (jj_scan_token(RSQPAREN)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_19() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(OR)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_87() {
+    if (jj_scan_token(IF)) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_28()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_31()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_53() {
+    if (jj_3R_77()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_18() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(DIVIDE)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_24() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(DOT)) return true;
+    if (jj_scan_token(LENGTH)) return true;
     return false;
   }
 
@@ -1729,274 +1860,147 @@ public class PoohJ implements PoohJConstants {
     return false;
   }
 
-  static private boolean jj_3R_89() {
-    if (jj_3R_90()) return true;
+  static private boolean jj_3_17() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(MULTIPLY)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_68() {
+    if (jj_scan_token(FLOAT)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_51() {
+    if (jj_3R_75()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_16() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(MINUS)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_12() {
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_50() {
+    if (jj_3R_74()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_15() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(PLUS)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_15() {
+    if (jj_3R_27()) return true;
+    if (jj_3R_23()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_49() {
+    if (jj_3R_73()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_85() {
+    if (jj_3R_87()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_62() {
+    if (jj_scan_token(THIS)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_14() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(NE)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_82() {
+    if (jj_3R_86()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_48() {
+    if (jj_3R_72()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_84() {
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_67() {
+    if (jj_scan_token(BOOLEAN)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_13() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(AND)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_47() {
+    if (jj_3R_71()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_79() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_84()) {
+    jj_scanpos = xsp;
+    if (jj_3R_85()) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_77() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(DOT)) return true;
+    if (jj_3R_23()) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_82()) jj_scanpos = xsp;
+    if (jj_scan_token(RPAREN)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_46() {
+    if (jj_3R_70()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_23() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_45() {
+    if (jj_3R_69()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_66() {
+    if (jj_scan_token(INTEGER)) return true;
     return false;
   }
 
   static private boolean jj_3R_28() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_52()) {
-    jj_scanpos = xsp;
-    if (jj_3_5()) {
-    jj_scanpos = xsp;
-    if (jj_3_6()) {
-    jj_scanpos = xsp;
-    if (jj_3_7()) {
-    jj_scanpos = xsp;
-    if (jj_3R_53()) {
-    jj_scanpos = xsp;
-    if (jj_3R_54()) {
-    jj_scanpos = xsp;
-    if (jj_3R_55()) {
-    jj_scanpos = xsp;
-    if (jj_3R_56()) return true;
-    }
-    }
-    }
-    }
-    }
-    }
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_87() {
-    if (jj_3R_27()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_89()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  static private boolean jj_3_20() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(DOT)) return true;
-    if (jj_3R_22()) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_51() {
-    if (jj_3R_21()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_19() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(LTE)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_88() {
-    if (jj_scan_token(IF)) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_27()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_28()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_21() {
-    if (jj_3R_23()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_25() {
-    if (jj_scan_token(NEW)) return true;
-    if (jj_scan_token(INTEGER)) return true;
-    if (jj_scan_token(LSQPAREN)) return true;
-    if (jj_3R_27()) return true;
-    if (jj_scan_token(RSQPAREN)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_18() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(OR)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_50() {
-    if (jj_3R_75()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_17() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(DIVIDE)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_23() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(DOT)) return true;
-    if (jj_scan_token(LENGTH)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_66() {
-    if (jj_scan_token(FLOAT)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_49() {
-    if (jj_3R_74()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_16() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(MULTIPLY)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_11() {
-    if (jj_3R_20()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_48() {
-    if (jj_3R_73()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_15() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(MINUS)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_15() {
-    if (jj_3R_26()) return true;
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_47() {
-    if (jj_3R_72()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_84() {
-    if (jj_3R_88()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_14() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(PLUS)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_46() {
-    if (jj_3R_71()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_65() {
-    if (jj_scan_token(BOOLEAN)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_60() {
-    if (jj_scan_token(THIS)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_83() {
-    if (jj_3R_20()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_13() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(NE)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_81() {
-    if (jj_3R_87()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_45() {
-    if (jj_3R_70()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_77() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_83()) {
-    jj_scanpos = xsp;
-    if (jj_3R_84()) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3_12() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(AND)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_44() {
-    if (jj_3R_69()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_75() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(DOT)) return true;
-    if (jj_3R_22()) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_81()) jj_scanpos = xsp;
-    if (jj_scan_token(RPAREN)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_43() {
-    if (jj_3R_68()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_64() {
-    if (jj_scan_token(INTEGER)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_22() {
-    if (jj_scan_token(IDENTIFIER)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_42() {
-    if (jj_3R_67()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_14() {
-    if (jj_scan_token(CLASS)) return true;
-    if (jj_3R_22()) return true;
-    if (jj_scan_token(LBRACE)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_27() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_42()) {
-    jj_scanpos = xsp;
-    if (jj_3R_43()) {
-    jj_scanpos = xsp;
-    if (jj_3R_44()) {
-    jj_scanpos = xsp;
     if (jj_3R_45()) {
     jj_scanpos = xsp;
     if (jj_3R_46()) {
@@ -2009,9 +2013,15 @@ public class PoohJ implements PoohJConstants {
     jj_scanpos = xsp;
     if (jj_3R_50()) {
     jj_scanpos = xsp;
-    if (jj_3_21()) {
+    if (jj_3R_51()) {
     jj_scanpos = xsp;
-    if (jj_3R_51()) return true;
+    if (jj_3R_52()) {
+    jj_scanpos = xsp;
+    if (jj_3R_53()) {
+    jj_scanpos = xsp;
+    if (jj_3_22()) {
+    jj_scanpos = xsp;
+    if (jj_3R_54()) return true;
     }
     }
     }
@@ -2025,13 +2035,33 @@ public class PoohJ implements PoohJConstants {
     return false;
   }
 
-  static private boolean jj_3_10() {
+  static private boolean jj_3R_14() {
+    if (jj_scan_token(CLASS)) return true;
+    if (jj_3R_23()) return true;
+    if (jj_scan_token(LBRACE)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_11() {
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_59() {
+  static private boolean jj_3R_61() {
     if (jj_scan_token(FALSE)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_19() {
+    if (jj_3R_23()) return true;
+    if (jj_scan_token(LSQPAREN)) return true;
+    if (jj_3R_23()) return true;
+    if (jj_scan_token(RSQPAREN)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_11()) { jj_scanpos = xsp; break; }
+    }
     return false;
   }
 
@@ -2042,82 +2072,69 @@ public class PoohJ implements PoohJConstants {
     return false;
   }
 
-  static private boolean jj_3R_19() {
+  static private boolean jj_3R_76() {
     if (jj_3R_22()) return true;
-    if (jj_scan_token(LSQPAREN)) return true;
-    if (jj_3R_22()) return true;
-    if (jj_scan_token(RSQPAREN)) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_10()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_74() {
-    if (jj_3R_21()) return true;
     if (jj_scan_token(LTE)) return true;
-    if (jj_3R_21()) return true;
+    if (jj_3R_22()) return true;
     return false;
   }
 
-  static private boolean jj_3R_58() {
+  static private boolean jj_3R_60() {
     if (jj_scan_token(TRUE)) return true;
     return false;
   }
 
-  static private boolean jj_3R_13() {
-    if (jj_scan_token(CLASS)) return true;
-    if (jj_3R_22()) return true;
-    if (jj_scan_token(INHERITANCE)) return true;
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_41() {
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_80() {
+  static private boolean jj_3R_81() {
     if (jj_scan_token(PRINT)) return true;
     if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_27()) return true;
+    if (jj_3R_28()) return true;
     if (jj_scan_token(RPAREN)) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_40() {
-    if (jj_3R_66()) return true;
+  static private boolean jj_3R_13() {
+    if (jj_scan_token(CLASS)) return true;
+    if (jj_3R_23()) return true;
+    if (jj_scan_token(INHERITANCE)) return true;
+    if (jj_3R_23()) return true;
     return false;
   }
 
-  static private boolean jj_3_9() {
-    if (jj_scan_token(SEMICOLON)) return true;
+  static private boolean jj_3R_44() {
+    if (jj_3R_23()) return true;
     return false;
   }
 
-  static private boolean jj_3R_73() {
-    if (jj_3R_21()) return true;
+  static private boolean jj_3R_75() {
+    if (jj_3R_22()) return true;
     if (jj_scan_token(OR)) return true;
-    if (jj_3R_21()) return true;
+    if (jj_3R_22()) return true;
     return false;
   }
 
-  static private boolean jj_3R_39() {
-    if (jj_3R_65()) return true;
+  static private boolean jj_3R_43() {
+    if (jj_3R_68()) return true;
     return false;
   }
 
-  static private boolean jj_3R_57() {
+  static private boolean jj_3R_59() {
     if (jj_scan_token(FLOAT_LITERAL)) return true;
     return false;
   }
 
-  static private boolean jj_3R_38() {
-    if (jj_3R_64()) return true;
+  static private boolean jj_3_10() {
+    if (jj_scan_token(SEMICOLON)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_42() {
+    if (jj_3R_67()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_41() {
+    if (jj_3R_66()) return true;
     return false;
   }
 
@@ -2127,36 +2144,58 @@ public class PoohJ implements PoohJConstants {
   }
 
   static private boolean jj_3R_18() {
-    if (jj_3R_22()) return true;
+    if (jj_3R_23()) return true;
     if (jj_scan_token(LSQPAREN)) return true;
-    if (jj_3R_27()) return true;
+    if (jj_3R_28()) return true;
     if (jj_scan_token(RSQPAREN)) return true;
     if (jj_scan_token(ASSIGN)) return true;
-    if (jj_3R_27()) return true;
+    if (jj_3R_28()) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_9()) { jj_scanpos = xsp; break; }
+      if (jj_3_10()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  static private boolean jj_3R_26() {
+  static private boolean jj_3R_40() {
+    if (jj_3R_31()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_27() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3_4()) {
     jj_scanpos = xsp;
-    if (jj_3R_38()) {
+    if (jj_3R_41()) {
     jj_scanpos = xsp;
-    if (jj_3R_39()) {
+    if (jj_3R_42()) {
     jj_scanpos = xsp;
-    if (jj_3R_40()) {
+    if (jj_3R_43()) {
     jj_scanpos = xsp;
-    if (jj_3R_41()) return true;
+    if (jj_3R_44()) return true;
     }
     }
     }
     }
+    return false;
+  }
+
+  static private boolean jj_3R_74() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(DIVIDE)) return true;
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_30() {
+    if (jj_3R_31()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_39() {
+    if (jj_scan_token(INTEGER_LITERAL)) return true;
     return false;
   }
 
@@ -2165,40 +2204,18 @@ public class PoohJ implements PoohJConstants {
     return false;
   }
 
-  static private boolean jj_3R_37() {
-    if (jj_3R_28()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_86() {
-    if (jj_3R_28()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_72() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(DIVIDE)) return true;
-    if (jj_3R_21()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_36() {
-    if (jj_scan_token(INTEGER_LITERAL)) return true;
+  static private boolean jj_3R_25() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_39()) {
+    jj_scanpos = xsp;
+    if (jj_3R_40()) return true;
+    }
     return false;
   }
 
   static private boolean jj_3_1() {
     if (jj_3R_13()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_24() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_36()) {
-    jj_scanpos = xsp;
-    if (jj_3R_37()) return true;
-    }
     return false;
   }
 
@@ -2214,7 +2231,7 @@ public class PoohJ implements PoohJConstants {
   static private Token jj_scanpos, jj_lastpos;
   static private int jj_la;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[19];
+  static final private int[] jj_la1 = new int[20];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -2222,12 +2239,12 @@ public class PoohJ implements PoohJConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x1000000,0x0,0x0,0xe0002000,0x0,0x0,0x2000,0xe0000000,0xe0002000,0x20000000,0xe0002000,0xe4002200,0xe4002200,0x0,0x4000000,0x0,0x200,0xe0002000,0x0,};
+      jj_la1_0 = new int[] {0x2000000,0x0,0x0,0xc0002000,0x0,0x0,0x2000,0xc0000000,0x0,0xc0002000,0x40000000,0xc0002000,0xc8002200,0xc8002200,0x0,0x8000000,0x0,0x200,0xc0002000,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x40,0x4000b,0x42000,0x200000,0x4000b,0x0,0x2000,0x42000,0x0,0x42000,0x45b820,0x45b820,0x200000,0x11000,0x800,0x400020,0x4a000,0x200000,};
+      jj_la1_1 = new int[] {0x0,0x80,0x80016,0x84001,0x400000,0x80016,0x0,0x0,0x4000,0x84001,0x0,0x84001,0x8b7041,0x8b7041,0x400000,0x22000,0x1000,0x800040,0x94001,0x400000,};
    }
-  static final private JJCalls[] jj_2_rtns = new JJCalls[24];
+  static final private JJCalls[] jj_2_rtns = new JJCalls[25];
   static private boolean jj_rescan = false;
   static private int jj_gc = 0;
 
@@ -2249,7 +2266,7 @@ public class PoohJ implements PoohJConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2264,7 +2281,7 @@ public class PoohJ implements PoohJConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2282,7 +2299,7 @@ public class PoohJ implements PoohJConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2293,7 +2310,7 @@ public class PoohJ implements PoohJConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2310,7 +2327,7 @@ public class PoohJ implements PoohJConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2320,7 +2337,7 @@ public class PoohJ implements PoohJConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2435,12 +2452,12 @@ public class PoohJ implements PoohJConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[55];
+    boolean[] la1tokens = new boolean[56];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 19; i++) {
+    for (int i = 0; i < 20; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -2452,7 +2469,7 @@ public class PoohJ implements PoohJConstants {
         }
       }
     }
-    for (int i = 0; i < 55; i++) {
+    for (int i = 0; i < 56; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
@@ -2479,7 +2496,7 @@ public class PoohJ implements PoohJConstants {
 
   static private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 24; i++) {
+    for (int i = 0; i < 25; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -2510,6 +2527,7 @@ public class PoohJ implements PoohJConstants {
             case 21: jj_3_22(); break;
             case 22: jj_3_23(); break;
             case 23: jj_3_24(); break;
+            case 24: jj_3_25(); break;
           }
         }
         p = p.next;

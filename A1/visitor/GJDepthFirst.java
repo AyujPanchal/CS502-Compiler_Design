@@ -449,11 +449,12 @@ public class GJDepthFirst<R,A> implements GJVisitor<R,A> {
     * f5 -> ";"
     * f6 -> Expression()
     * f7 -> ";"
-    * f8 -> Statement()
-    * f9 -> ")"
-    * f10 -> "{"
-    * f11 -> ( Statement() )*
-    * f12 -> "}"
+    * f8 -> Identifier()
+    * f9 -> "++"
+    * f10 -> ")"
+    * f11 -> "{"
+    * f12 -> ( Statement() )*
+    * f13 -> "}"
     */
    public R visit(ForStatement n, A argu) {
       R _ret=null;
@@ -470,6 +471,7 @@ public class GJDepthFirst<R,A> implements GJVisitor<R,A> {
       n.f10.accept(this, argu);
       n.f11.accept(this, argu);
       n.f12.accept(this, argu);
+      n.f13.accept(this, argu);
       return _ret;
    }
 

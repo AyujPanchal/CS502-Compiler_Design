@@ -14,11 +14,12 @@ package syntaxtree;
  * f5 -> ";"
  * f6 -> Expression()
  * f7 -> ";"
- * f8 -> Statement()
- * f9 -> ")"
- * f10 -> "{"
- * f11 -> ( Statement() )*
- * f12 -> "}"
+ * f8 -> Identifier()
+ * f9 -> "++"
+ * f10 -> ")"
+ * f11 -> "{"
+ * f12 -> ( Statement() )*
+ * f13 -> "}"
  */
 public class ForStatement implements Node {
    public NodeToken f0;
@@ -29,13 +30,14 @@ public class ForStatement implements Node {
    public NodeToken f5;
    public Expression f6;
    public NodeToken f7;
-   public Statement f8;
+   public Identifier f8;
    public NodeToken f9;
    public NodeToken f10;
-   public NodeListOptional f11;
-   public NodeToken f12;
+   public NodeToken f11;
+   public NodeListOptional f12;
+   public NodeToken f13;
 
-   public ForStatement(NodeToken n0, NodeToken n1, FormalParameter n2, NodeToken n3, Expression n4, NodeToken n5, Expression n6, NodeToken n7, Statement n8, NodeToken n9, NodeToken n10, NodeListOptional n11, NodeToken n12) {
+   public ForStatement(NodeToken n0, NodeToken n1, FormalParameter n2, NodeToken n3, Expression n4, NodeToken n5, Expression n6, NodeToken n7, Identifier n8, NodeToken n9, NodeToken n10, NodeToken n11, NodeListOptional n12, NodeToken n13) {
       f0 = n0;
       f1 = n1;
       f2 = n2;
@@ -49,9 +51,10 @@ public class ForStatement implements Node {
       f10 = n10;
       f11 = n11;
       f12 = n12;
+      f13 = n13;
    }
 
-   public ForStatement(FormalParameter n0, Expression n1, Expression n2, Statement n3, NodeListOptional n4) {
+   public ForStatement(FormalParameter n0, Expression n1, Expression n2, Identifier n3, NodeListOptional n4) {
       f0 = new NodeToken("for");
       f1 = new NodeToken("(");
       f2 = n0;
@@ -61,10 +64,11 @@ public class ForStatement implements Node {
       f6 = n2;
       f7 = new NodeToken(";");
       f8 = n3;
-      f9 = new NodeToken(")");
-      f10 = new NodeToken("{");
-      f11 = n4;
-      f12 = new NodeToken("}");
+      f9 = new NodeToken("++");
+      f10 = new NodeToken(")");
+      f11 = new NodeToken("{");
+      f12 = n4;
+      f13 = new NodeToken("}");
    }
 
    public void accept(visitor.Visitor v) {

@@ -381,11 +381,12 @@ public class DepthFirstVisitor implements Visitor {
     * f5 -> ";"
     * f6 -> Expression()
     * f7 -> ";"
-    * f8 -> Statement()
-    * f9 -> ")"
-    * f10 -> "{"
-    * f11 -> ( Statement() )*
-    * f12 -> "}"
+    * f8 -> Identifier()
+    * f9 -> "++"
+    * f10 -> ")"
+    * f11 -> "{"
+    * f12 -> ( Statement() )*
+    * f13 -> "}"
     */
    public void visit(ForStatement n) {
       n.f0.accept(this);
@@ -401,6 +402,7 @@ public class DepthFirstVisitor implements Visitor {
       n.f10.accept(this);
       n.f11.accept(this);
       n.f12.accept(this);
+      n.f13.accept(this);
    }
 
    /**

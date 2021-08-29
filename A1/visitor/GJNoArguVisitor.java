@@ -243,11 +243,12 @@ public interface GJNoArguVisitor<R> {
     * f5 -> ";"
     * f6 -> Expression()
     * f7 -> ";"
-    * f8 -> Statement()
-    * f9 -> ")"
-    * f10 -> "{"
-    * f11 -> ( Statement() )*
-    * f12 -> "}"
+    * f8 -> Identifier()
+    * f9 -> "++"
+    * f10 -> ")"
+    * f11 -> "{"
+    * f12 -> ( Statement() )*
+    * f13 -> "}"
     */
    public R visit(ForStatement n);
 
