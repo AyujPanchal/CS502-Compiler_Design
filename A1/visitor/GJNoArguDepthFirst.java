@@ -70,6 +70,8 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
    int Controlflow = 0;
    ArrayList<String> Varlist = new ArrayList<String>();
    HashMap<String, String> map = new HashMap<>();
+   HashMap<String, String> MethodMap = new HashMap<>();
+   String methodString = "";
    String CurString = "";
    
    /**
@@ -171,7 +173,8 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
 //      System.out.println("Class " + id1 + " : " + id2);
       n.f4.accept(this);
       n.f5.accept(this);
-
+      methodString = "";
+      MethodMap.clear();
       CurString = "";
       return _ret;
    }
@@ -193,6 +196,7 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f2.accept(this);
       n.f3.accept(this);
       n.f4.accept(this);
+      add();
       CurString = CurString.substring(0, CurString.length()-1);
       map.put(id, CurString);
 //      ArrayList<String> sortedKeys
@@ -204,6 +208,8 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
 //      for (String x : sortedKeys)
 //          System.out.println(map.get(x));
       CurString = "";
+      methodString = "";
+      MethodMap.clear();
       return _ret;
    }
 
@@ -257,7 +263,8 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       Varlist.clear();
       n.f9.accept(this);
       Controlflow += 1;
-      CurString += "Method " + Classname + "." + Methodname + " " + Localvar + " " + Unreferencedvar + " " + Controlflow + " \n";
+      methodString += "Method " + Classname + "." + Methodname + " " + Localvar + " " + Unreferencedvar + " " + Controlflow + " \n";
+      MethodMap.put(id, methodString);
 //      System.out.println(Controlflow);
       Localvar = 0;
       Unreferencedvar = 0;
@@ -265,6 +272,7 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f10.accept(this);
       n.f11.accept(this);
       n.f12.accept(this);
+      methodString = "";
       return _ret;
    }
 
@@ -910,6 +918,16 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f0.accept(this);
       n.f1.accept(this);
       return _ret;
+   }
+   
+   public void add() {
+	   ArrayList<String> sortedKeys = new ArrayList<String>(MethodMap.keySet());
+		
+	   Collections.sort(sortedKeys);
+	
+	   // Display the TreeMap which is naturally sorted
+	   for (String x : sortedKeys)
+		   CurString += (MethodMap.get(x));
    }
    
    public void print() {
