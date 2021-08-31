@@ -1,41 +1,33 @@
 class Test {
-    public static void main(String[] args) {
-        System.out.println(new A().foo(10));
-    }
+public static void main(String[] args) {
+System.out.println(new A().foo(10));
 }
-
+}
 class A {
-    public int foo(int p) {
-        int x;
-        boolean y;
-        boolean b;
-        int z;
-        int w;
-        int q;
-        float myvar;
-        int [] arr;
-        x=10;
-        y=true;
-        z=0;
-        myvar = 32.04;
-        arr = new int[10];
-        for (int i=0;i<=5;i++) {
-            z=z+arr[i];
-            z=arr.length;
-        }
-        while (y) {
-            z=z+p;
-            if (z != 10) {
-                y=false;
-            }
-        }
-        q=this.bar();
-        return z;
-    }
-    public int bar() {
-        int a;
-        int b;
-        a=10;
-        return a;
-    }
+public int foo(int p) {
+int x;
+boolean y;
+boolean b;
+int z;
+int w;
+int q;
+x = 10;
+y = true;
+z = 0;
+while (y) {
+z = z + p;
+if (z != 10) {
+y = false;
 }
+}
+q = this.bar();
+return z;
+}
+public int bar() {
+int a;
+int b;
+a = 10;
+return a;
+}
+}
+class B extends A {}

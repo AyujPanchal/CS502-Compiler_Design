@@ -69,6 +69,8 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
    int Unreferencedvar = 0;
    int Controlflow = 0;
    ArrayList<String> Varlist = new ArrayList<String>();
+   HashMap<String, String> map = new HashMap<>();
+   String CurString = "";
    
    /**
     * f0 -> MainClass()
@@ -80,6 +82,7 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
+      print();
       return _ret;
    }
 
@@ -107,7 +110,8 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f0.accept(this);
       String id = n.f1.f0.tokenImage;
       Classname = id;
-      System.out.println("Class " + id + " :");
+      map.put(id, "Class " + id + " :\n" + "Method Test.main 1 1 1");
+//      System.out.println("Class " + id + " :");
       n.f2.accept(this);
       n.f3.accept(this);
       n.f4.accept(this);
@@ -123,7 +127,15 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f14.accept(this);
       n.f15.accept(this);
       n.f16.accept(this);
-      System.out.println("Method Test.main 1 1 1");
+//      ArrayList<String> sortedKeys
+//          = new ArrayList<String>(map.keySet());
+//
+//      Collections.sort(sortedKeys);
+//
+//      // Display the TreeMap which is naturally sorted
+//      for (String x : sortedKeys)
+//          System.out.println(map.get(x));
+//      System.out.println("Method Test.main 1 1 1");
       return _ret;
    }
 
@@ -134,6 +146,7 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
    public Integer visit(TypeDeclaration n) {
       Integer _ret=null;
       n.f0.accept(this);
+//      print();
       return _ret;
    }
 
@@ -151,9 +164,15 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       String id1 = n.f1.f0.tokenImage;
       n.f2.accept(this);
       String id2 = n.f3.f0.tokenImage;
-      System.out.println("Class " + id1 + " : " + id2);
+      CurString = "";
+      CurString += "Class " + id1 + " : " + id2 + "\n";
+      CurString = CurString.substring(0, CurString.length()-1);
+      map.put(id1, CurString);
+//      System.out.println("Class " + id1 + " : " + id2);
       n.f4.accept(this);
       n.f5.accept(this);
+
+      CurString = "";
       return _ret;
    }
 
@@ -169,10 +188,22 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f0.accept(this);
       String id = n.f1.f0.tokenImage;
       Classname = id;
-      System.out.println("Class " + id + " :");
+      CurString += "Class " + id + " :\n";
+//      System.out.println("Class " + id + " :");
       n.f2.accept(this);
       n.f3.accept(this);
       n.f4.accept(this);
+      CurString = CurString.substring(0, CurString.length()-1);
+      map.put(id, CurString);
+//      ArrayList<String> sortedKeys
+//          = new ArrayList<String>(map.keySet());
+//
+//      Collections.sort(sortedKeys);
+//
+//      // Display the TreeMap which is naturally sorted
+//      for (String x : sortedKeys)
+//          System.out.println(map.get(x));
+      CurString = "";
       return _ret;
    }
 
@@ -211,7 +242,7 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f1.accept(this);
       String id = n.f2.f0.tokenImage;
       Methodname = id;
-      System.out.print("Method " + Classname + "." + Methodname + " ");
+//      System.out.print("Method " + Classname + "." + Methodname + " ");
       n.f3.accept(this);
       n.f4.accept(this);
       n.f5.accept(this);
@@ -219,14 +250,15 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f7.accept(this);
       Unreferencedvar = Localvar;
       n.f8.accept(this);
-      System.out.print(Localvar);
-      System.out.print(" ");
-      System.out.print(Unreferencedvar);
-      System.out.print(" ");
+//      System.out.print(Localvar);
+//      System.out.print(" ");
+//      System.out.print(Unreferencedvar);
+//      System.out.print(" ");
       Varlist.clear();
       n.f9.accept(this);
       Controlflow += 1;
-      System.out.println(Controlflow);
+      CurString += "Method " + Classname + "." + Methodname + " " + Localvar + " " + Unreferencedvar + " " + Controlflow + " \n";
+//      System.out.println(Controlflow);
       Localvar = 0;
       Unreferencedvar = 0;
       Controlflow = 0;
@@ -879,5 +911,16 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f1.accept(this);
       return _ret;
    }
-
+   
+   public void print() {
+	   ArrayList<String> sortedKeys = new ArrayList<String>(map.keySet());
+	
+	   Collections.sort(sortedKeys);
+	
+	   // Display the TreeMap which is naturally sorted
+	   for (String x : sortedKeys)
+		   System.out.println(map.get(x));
+   }
+   
+   
 }
