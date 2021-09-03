@@ -71,6 +71,7 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
    ArrayList<String> Varlist = new ArrayList<String>();
    HashMap<String, String> map = new HashMap<>();
    HashMap<String, String> MethodMap = new HashMap<>();
+   HashMap<String, Integer> formalMap = new HashMap<>();
    String methodString = "";
    String CurString = "";
    
@@ -261,6 +262,7 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
 //      System.out.print(Unreferencedvar);
 //      System.out.print(" ");
       Varlist.clear();
+      formalMap.clear();
       n.f9.accept(this);
       Controlflow += 1;
       methodString += "Method " + Classname + "." + Methodname + " " + Localvar + " " + Unreferencedvar + " " + Controlflow + " \n";
@@ -294,7 +296,8 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
    public Integer visit(FormalParameter n) {
       Integer _ret=null;
       n.f0.accept(this);
-      n.f1.accept(this);
+      String id = n.f1.f0.tokenImage;
+      formalMap.put(id,0);
       Localvar += 1;
       return _ret;
    }
@@ -410,7 +413,24 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       }
       Varlist.add(id);
       if(b1 == true) {
-    	  Unreferencedvar -= 1;
+    	  boolean p1 = false;
+    	  ArrayList<String> keys = new ArrayList<String>(formalMap.keySet());
+          for(String x: keys) {
+        	  if(x == id) {
+        		  p1 = true;
+        		  formalMap.replace(id,formalMap.get(id)+1);
+//        		  System.out.println(formalMap.get(id));
+        		  break;
+        	  }
+          }
+          if(p1) {
+        	  if(formalMap.get(id) == 1) {
+        		  Unreferencedvar -= 1;
+        	  }
+          }
+          else {
+        	  Unreferencedvar -= 1;
+          }
       }
       n.f1.accept(this);
       n.f2.accept(this);
@@ -439,7 +459,24 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       }
       Varlist.add(id);
       if(b1 == true) {
-    	  Unreferencedvar -= 1;
+    	  boolean p1 = false;
+    	  ArrayList<String> keys = new ArrayList<String>(formalMap.keySet());
+          for(String x: keys) {
+        	  if(x == id) {
+        		  p1 = true;
+        		  formalMap.replace(id,formalMap.get(id)+1);
+//        		  System.out.println(formalMap.get(id));
+        		  break;
+        	  }
+          }
+          if(p1) {
+        	  if(formalMap.get(id) == 1) {
+        		  Unreferencedvar -= 1;
+        	  }
+          }
+          else {
+        	  Unreferencedvar -= 1;
+          }
       }
       n.f1.accept(this);
       n.f2.accept(this);
@@ -568,7 +605,7 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
       n.f10.accept(this);
       n.f11.accept(this);
       n.f12.accept(this);
-      n.f13.accept(this);
+      Localvar+=1;
       Controlflow+=1;
       return _ret;
    }
@@ -829,6 +866,19 @@ public class GJNoArguDepthFirst implements GJNoArguVisitor<Integer> {
    public Integer visit(Identifier n) {
       Integer _ret=null;
       n.f0.accept(this);
+      String id = n.f0.tokenImage;
+      ArrayList<String> keys = new ArrayList<String>(formalMap.keySet());
+      for(String x: keys) {
+    	  if(x == id) {
+    		  formalMap.replace(id,formalMap.get(id)+1);
+//    		  System.out.println(formalMap.get(id));
+    		  if(formalMap.get(id) != null && formalMap.get(id) == 1) {
+    	    	  Unreferencedvar -= 1;
+    	      }
+    		  break;
+    	  }
+      }
+      
       return _ret;
    }
 

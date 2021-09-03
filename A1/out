@@ -1,0 +1,6 @@
+Class A :
+Method A.bar 2 1 1 
+Method A.foo 7 2 4 
+Class B : A
+Class Test :
+Method Test.main 1 1 1

@@ -8,36 +8,38 @@ package syntaxtree;
  * Grammar production:
  * f0 -> "for"
  * f1 -> "("
- * f2 -> FormalParameter()
- * f3 -> "="
- * f4 -> Expression()
- * f5 -> ";"
- * f6 -> Expression()
- * f7 -> ";"
- * f8 -> Identifier()
- * f9 -> "++"
- * f10 -> ")"
- * f11 -> "{"
- * f12 -> ( Statement() )*
- * f13 -> "}"
+ * f2 -> Type()
+ * f3 -> Identifier()
+ * f4 -> "="
+ * f5 -> Expression()
+ * f6 -> ";"
+ * f7 -> Expression()
+ * f8 -> ";"
+ * f9 -> Identifier()
+ * f10 -> "++"
+ * f11 -> ")"
+ * f12 -> "{"
+ * f13 -> ( Statement() )*
+ * f14 -> "}"
  */
 public class ForStatement implements Node {
    public NodeToken f0;
    public NodeToken f1;
-   public FormalParameter f2;
-   public NodeToken f3;
-   public Expression f4;
-   public NodeToken f5;
-   public Expression f6;
-   public NodeToken f7;
-   public Identifier f8;
-   public NodeToken f9;
+   public Type f2;
+   public Identifier f3;
+   public NodeToken f4;
+   public Expression f5;
+   public NodeToken f6;
+   public Expression f7;
+   public NodeToken f8;
+   public Identifier f9;
    public NodeToken f10;
    public NodeToken f11;
-   public NodeListOptional f12;
-   public NodeToken f13;
+   public NodeToken f12;
+   public NodeListOptional f13;
+   public NodeToken f14;
 
-   public ForStatement(NodeToken n0, NodeToken n1, FormalParameter n2, NodeToken n3, Expression n4, NodeToken n5, Expression n6, NodeToken n7, Identifier n8, NodeToken n9, NodeToken n10, NodeToken n11, NodeListOptional n12, NodeToken n13) {
+   public ForStatement(NodeToken n0, NodeToken n1, Type n2, Identifier n3, NodeToken n4, Expression n5, NodeToken n6, Expression n7, NodeToken n8, Identifier n9, NodeToken n10, NodeToken n11, NodeToken n12, NodeListOptional n13, NodeToken n14) {
       f0 = n0;
       f1 = n1;
       f2 = n2;
@@ -52,23 +54,25 @@ public class ForStatement implements Node {
       f11 = n11;
       f12 = n12;
       f13 = n13;
+      f14 = n14;
    }
 
-   public ForStatement(FormalParameter n0, Expression n1, Expression n2, Identifier n3, NodeListOptional n4) {
+   public ForStatement(Type n0, Identifier n1, Expression n2, Expression n3, Identifier n4, NodeListOptional n5) {
       f0 = new NodeToken("for");
       f1 = new NodeToken("(");
       f2 = n0;
-      f3 = new NodeToken("=");
-      f4 = n1;
-      f5 = new NodeToken(";");
-      f6 = n2;
-      f7 = new NodeToken(";");
-      f8 = n3;
-      f9 = new NodeToken("++");
-      f10 = new NodeToken(")");
-      f11 = new NodeToken("{");
-      f12 = n4;
-      f13 = new NodeToken("}");
+      f3 = n1;
+      f4 = new NodeToken("=");
+      f5 = n2;
+      f6 = new NodeToken(";");
+      f7 = n3;
+      f8 = new NodeToken(";");
+      f9 = n4;
+      f10 = new NodeToken("++");
+      f11 = new NodeToken(")");
+      f12 = new NodeToken("{");
+      f13 = n5;
+      f14 = new NodeToken("}");
    }
 
    public void accept(visitor.Visitor v) {

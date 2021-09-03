@@ -507,7 +507,7 @@ Statement Statement() :
       n6=WhileStatement()
       { n0 = new NodeChoice(n6, 5); }
    |
-      LOOKAHEAD(50)
+      LOOKAHEAD("for" "(")
       n7=ForStatement()
       { n0 = new NodeChoice(n7, 6); }
    |
@@ -731,50 +731,52 @@ ForStatement ForStatement() :
    Token n1;
    NodeToken n2;
    Token n3;
-   FormalParameter n4;
-   NodeToken n5;
-   Token n6;
-   Expression n7;
-   NodeToken n8;
-   Token n9;
-   Expression n10;
-   NodeToken n11;
-   Token n12;
-   Identifier n13;
-   NodeToken n14;
-   Token n15;
-   NodeToken n16;
-   Token n17;
-   NodeToken n18;
-   Token n19;
-   NodeListOptional n20 = new NodeListOptional();
-   Statement n21;
-   NodeToken n22;
-   Token n23;
+   Type n4;
+   Identifier n5;
+   NodeToken n6;
+   Token n7;
+   Expression n8;
+   NodeToken n9;
+   Token n10;
+   Expression n11;
+   NodeToken n12;
+   Token n13;
+   Identifier n14;
+   NodeToken n15;
+   Token n16;
+   NodeToken n17;
+   Token n18;
+   NodeToken n19;
+   Token n20;
+   NodeListOptional n21 = new NodeListOptional();
+   Statement n22;
+   NodeToken n23;
+   Token n24;
 
    
 }
 {
    n1="for" { n0 = JTBToolkit.makeNodeToken(n1); }
    n3="(" { n2 = JTBToolkit.makeNodeToken(n3); }
-   n4=FormalParameter()
-   n6="=" { n5 = JTBToolkit.makeNodeToken(n6); }
-   n7=Expression()
-   n9=";" { n8 = JTBToolkit.makeNodeToken(n9); }
-   n10=Expression()
-   n12=";" { n11 = JTBToolkit.makeNodeToken(n12); }
-   n13=Identifier()
-   n15="++" { n14 = JTBToolkit.makeNodeToken(n15); }
-   n17=")" { n16 = JTBToolkit.makeNodeToken(n17); }
-   n19="{" { n18 = JTBToolkit.makeNodeToken(n19); }
+   n4=Type()
+   n5=Identifier()
+   n7="=" { n6 = JTBToolkit.makeNodeToken(n7); }
+   n8=Expression()
+   n10=";" { n9 = JTBToolkit.makeNodeToken(n10); }
+   n11=Expression()
+   n13=";" { n12 = JTBToolkit.makeNodeToken(n13); }
+   n14=Identifier()
+   n16="++" { n15 = JTBToolkit.makeNodeToken(n16); }
+   n18=")" { n17 = JTBToolkit.makeNodeToken(n18); }
+   n20="{" { n19 = JTBToolkit.makeNodeToken(n20); }
    (
-      n21=Statement()
-      { n20.addNode(n21); }
+      n22=Statement()
+      { n21.addNode(n22); }
    )*
-   { n20.nodes.trimToSize(); }
-   n23="}" { n22 = JTBToolkit.makeNodeToken(n23); }
+   { n21.nodes.trimToSize(); }
+   n24="}" { n23 = JTBToolkit.makeNodeToken(n24); }
    
-   { return new ForStatement(n0,n2,n4,n5,n7,n8,n10,n11,n13,n14,n16,n18,n20,n22); }
+   { return new ForStatement(n0,n2,n4,n5,n6,n8,n9,n11,n12,n14,n15,n17,n19,n21,n23); }
 }
 
 PrintStatement PrintStatement() :

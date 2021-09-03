@@ -263,7 +263,7 @@ void Statement() :
 |
   WhileStatement()
 |
-  LOOKAHEAD(50)
+  LOOKAHEAD( "for" "(" )
   ForStatement()
 |
   PrintStatement()
@@ -320,7 +320,7 @@ void WhileStatement() :
 void ForStatement() :
 {}
 {
-  "for" "(" FormalParameter() "=" Expression() ";" Expression() ";" Identifier() "++" ")" "{"  (Statement())*  "}" 
+  "for" "(" Type() Identifier() "=" Expression() ";" Expression() ";" Identifier() "++" ")" "{"  (Statement())*  "}" 
 }
 void PrintStatement() :
 {}

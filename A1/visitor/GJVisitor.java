@@ -237,18 +237,19 @@ public interface GJVisitor<R,A> {
    /**
     * f0 -> "for"
     * f1 -> "("
-    * f2 -> FormalParameter()
-    * f3 -> "="
-    * f4 -> Expression()
-    * f5 -> ";"
-    * f6 -> Expression()
-    * f7 -> ";"
-    * f8 -> Identifier()
-    * f9 -> "++"
-    * f10 -> ")"
-    * f11 -> "{"
-    * f12 -> ( Statement() )*
-    * f13 -> "}"
+    * f2 -> Type()
+    * f3 -> Identifier()
+    * f4 -> "="
+    * f5 -> Expression()
+    * f6 -> ";"
+    * f7 -> Expression()
+    * f8 -> ";"
+    * f9 -> Identifier()
+    * f10 -> "++"
+    * f11 -> ")"
+    * f12 -> "{"
+    * f13 -> ( Statement() )*
+    * f14 -> "}"
     */
    public R visit(ForStatement n, A argu);
 

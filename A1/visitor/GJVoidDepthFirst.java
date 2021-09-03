@@ -385,18 +385,19 @@ public class GJVoidDepthFirst<A> implements GJVoidVisitor<A> {
    /**
     * f0 -> "for"
     * f1 -> "("
-    * f2 -> FormalParameter()
-    * f3 -> "="
-    * f4 -> Expression()
-    * f5 -> ";"
-    * f6 -> Expression()
-    * f7 -> ";"
-    * f8 -> Identifier()
-    * f9 -> "++"
-    * f10 -> ")"
-    * f11 -> "{"
-    * f12 -> ( Statement() )*
-    * f13 -> "}"
+    * f2 -> Type()
+    * f3 -> Identifier()
+    * f4 -> "="
+    * f5 -> Expression()
+    * f6 -> ";"
+    * f7 -> Expression()
+    * f8 -> ";"
+    * f9 -> Identifier()
+    * f10 -> "++"
+    * f11 -> ")"
+    * f12 -> "{"
+    * f13 -> ( Statement() )*
+    * f14 -> "}"
     */
    public void visit(ForStatement n, A argu) {
       n.f0.accept(this, argu);
@@ -413,6 +414,7 @@ public class GJVoidDepthFirst<A> implements GJVoidVisitor<A> {
       n.f11.accept(this, argu);
       n.f12.accept(this, argu);
       n.f13.accept(this, argu);
+      n.f14.accept(this, argu);
    }
 
    /**
