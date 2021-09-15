@@ -7,10 +7,12 @@ class A {
     public int foo(int p) {
         int a;
         int b;
-        int c;
+        boolean c;
         a = 10;
         b = 20;
-        c = a + b;
+        while (a != b){
+        	c = false;
+        }
         return c;
     }
 }

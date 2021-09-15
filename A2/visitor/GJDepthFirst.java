@@ -76,7 +76,7 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
       if (foundTypeError) {
         System.out.println("Type checking failed.");
       } else {
-        System.out.println("Program type checked successfully.");
+        System.out.println("Program type-checked successfully.");
       }
       return _ret;
    }
@@ -343,6 +343,17 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
    }
    
    public static boolean typeEquals(String t1, String t2, Map<String,String> argu) {
+	  if(t1 == "int" && t2 == "float") {
+		  return false;
+	  } else if(t1 == "float" && t2 == "int") {
+		  return true;
+	  } else if(t1 == "float" && t2 == "float") {
+		  return true;
+	  } else if(t1 == "int" && t2 == "int") {
+		  return true;
+	  } else if(t1 == "int[]" && t2 == "int") {
+		  return true;
+	  }
       return t1.equals(t2);
    }
 
@@ -376,12 +387,19 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
     */
    public String visit(ArrayAssignmentStatement n, Map<String,String> argu) {
       String _ret=null;
-      n.f0.accept(this, argu);
+      String id = n.f0.accept(this, argu);
+      String idType = getType(id, argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
+      String exprType1 = n.f2.accept(this, argu);
+      if (!typeEquals("int", exprType1, argu)) {
+          foundTypeError = true;
+      }
       n.f3.accept(this, argu);
       n.f4.accept(this, argu);
-      n.f5.accept(this, argu);
+      String exprType2 = n.f5.accept(this, argu);
+      if (!typeEquals(idType, exprType2, argu)) {
+          foundTypeError = true;
+      }
       n.f6.accept(this, argu);
       return _ret;
    }
@@ -407,7 +425,10 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
       String _ret=null;
       n.f0.accept(this, argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
+      String exprType = n.f2.accept(this, argu);
+      if (!typeEquals("boolean", exprType, argu)) {
+          foundTypeError = true;
+      }      
       n.f3.accept(this, argu);
       n.f4.accept(this, argu);
       return _ret;
@@ -426,7 +447,10 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
       String _ret=null;
       n.f0.accept(this, argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
+      String exprType = n.f2.accept(this, argu);
+      if (!typeEquals("boolean", exprType, argu)) {
+          foundTypeError = true;
+      }
       n.f3.accept(this, argu);
       n.f4.accept(this, argu);
       n.f5.accept(this, argu);
@@ -445,7 +469,10 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
       String _ret=null;
       n.f0.accept(this, argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
+      String exprType = n.f2.accept(this, argu);
+      if (!typeEquals("boolean", exprType, argu)) {
+          foundTypeError = true;
+      }
       n.f3.accept(this, argu);
       n.f4.accept(this, argu);
       return _ret;
@@ -487,6 +514,21 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
       _ret = n.f0.accept(this, argu);
       return _ret;
    }
+   
+//   String _ret=null;
+//   String type1 = getType(n.f0.accept(this, argu), argu);
+//   n.f1.accept(this, argu);
+//   String type2 = getType(n.f2.accept(this, argu), argu);
+//   if (type1!=null && type2!=null && type1.equals(type2) && type1.equals("int")) {
+//     _ret = "int";
+//   } 
+//   else if (type1!=null && type2!=null && ((type1.equals("float") && type2.equals("int")) || (type1.equals("int") && type2.equals("float")) || (type1.equals("float") && type2.equals("float")))) {
+//   	_ret = "float";  
+//   }
+//   else {
+//     foundTypeError = true;
+//   }
+//   return _ret;
 
    /**
     * f0 -> PrimaryExpression()
@@ -495,9 +537,15 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
     */
    public String visit(AndExpression n, Map<String,String> argu) {
       String _ret=null;
-      n.f0.accept(this, argu);
+      String type1 = getType(n.f0.accept(this, argu), argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
+      String type2 = getType(n.f2.accept(this, argu), argu);
+      if (type1!=null && type2!=null && type1.equals(type2) && type1.equals("boolean")) {
+        _ret = "boolean";
+      } 
+      else {
+        foundTypeError = true;
+      }
       return _ret;
    }
 
@@ -508,9 +556,15 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
     */
    public String visit(OrExpression n, Map<String,String> argu) {
       String _ret=null;
-      n.f0.accept(this, argu);
+      String type1 = getType(n.f0.accept(this, argu), argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
+      String type2 = getType(n.f2.accept(this, argu), argu);
+      if (type1!=null && type2!=null && type1.equals(type2) && type1.equals("boolean")) {
+        _ret = "boolean";
+      } 
+      else {
+        foundTypeError = true;
+      }
       return _ret;
    }
 
@@ -521,10 +575,19 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
     */
    public String visit(CompareExpression n, Map<String,String> argu) {
       String _ret=null;
-      n.f0.accept(this, argu);
+      String type1 = getType(n.f0.accept(this, argu), argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
-      return _ret;
+      String type2 = getType(n.f2.accept(this, argu), argu);
+	    if (type1!=null && type2!=null && type1.equals(type2) && type1.equals("int")) {
+	    _ret = "boolean";
+	  } 
+	  else if (type1!=null && type2!=null && ((type1.equals("float") && type2.equals("int")) || (type1.equals("int") && type2.equals("float")) || (type1.equals("float") && type2.equals("float")))) {
+	  	_ret = "boolean";  
+	  }
+	  else {
+	    foundTypeError = true;
+	  }
+	  return _ret;
    }
 
    /**
@@ -534,9 +597,18 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
     */
    public String visit(neqExpression n, Map<String,String> argu) {
       String _ret=null;
-      n.f0.accept(this, argu);
+      String type1 = getType(n.f0.accept(this, argu), argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
+      String type2 = getType(n.f2.accept(this, argu), argu);
+	    if (type1!=null && type2!=null && type1.equals(type2) && type1.equals("int")) {
+	    _ret = "boolean";
+	  } 
+	  else if (type1!=null && type2!=null && ((type1.equals("float") && type2.equals("int")) || (type1.equals("int") && type2.equals("float")) || (type1.equals("float") && type2.equals("float")))) {
+	  	_ret = "boolean";  
+	  }
+	  else {
+	    foundTypeError = true;
+	  }
       return _ret;
    }
    
@@ -560,7 +632,11 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
       String type2 = getType(n.f2.accept(this, argu), argu);
       if (type1!=null && type2!=null && type1.equals(type2) && type1.equals("int")) {
         _ret = "int";
-      } else {
+      } 
+      else if (type1!=null && type2!=null && ((type1.equals("float") && type2.equals("int")) || (type1.equals("int") && type2.equals("float")) || (type1.equals("float") && type2.equals("float")))) {
+      	_ret = "float";  
+      }
+      else {
         foundTypeError = true;
       }
       return _ret;
@@ -573,9 +649,17 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
     */
    public String visit(MinusExpression n, Map<String,String> argu) {
       String _ret=null;
-      n.f0.accept(this, argu);
+      String type1 = getType(n.f0.accept(this, argu), argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
+      String type2 = getType(n.f2.accept(this, argu), argu);
+      if (type1!=null && type2!=null && type1.equals(type2) && type1.equals("int")) {
+        _ret = "int";
+      } else if (type1!=null && type2!=null && ((type1.equals("float") && type2.equals("int")) || (type1.equals("int") && type2.equals("float")) || (type1.equals("float") && type2.equals("float")))) {
+    	_ret = "float";  
+      }
+      else {
+        foundTypeError = true;
+      }
       return _ret;
    }
 
@@ -586,9 +670,18 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
     */
    public String visit(TimesExpression n, Map<String,String> argu) {
       String _ret=null;
-      n.f0.accept(this, argu);
+      String type1 = getType(n.f0.accept(this, argu), argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
+      String type2 = getType(n.f2.accept(this, argu), argu);
+      if (type1!=null && type2!=null && type1.equals(type2) && type1.equals("int")) {
+        _ret = "int";
+      }
+      else if (type1!=null && type2!=null && ((type1.equals("float") && type2.equals("int")) || (type1.equals("int") && type2.equals("float")) || (type1.equals("float") && type2.equals("float")))) {
+      	_ret = "float";  
+      }
+      else {
+        foundTypeError = true;
+      }
       return _ret;
    }
 
@@ -599,9 +692,18 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
     */
    public String visit(DivExpression n, Map<String,String> argu) {
       String _ret=null;
-      n.f0.accept(this, argu);
+      String type1 = getType(n.f0.accept(this, argu), argu);
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
+      String type2 = getType(n.f2.accept(this, argu), argu);
+      if (type1!=null && type2!=null && type1.equals(type2) && type1.equals("int")) {
+        _ret = "float";
+      } 
+      else if (type1!=null && type2!=null && ((type1.equals("float") && type2.equals("int")) || (type1.equals("int") && type2.equals("float")) || (type1.equals("float") && type2.equals("float")))) {
+      	_ret = "float";  
+      }
+      else {
+        foundTypeError = true;
+      }
       return _ret;
    }
 
@@ -692,8 +794,24 @@ public class GJDepthFirst implements GJVisitor<String,Map<String, String>> {
       case 0:
         _ret = "int";
         break;
+      case 1:
+    	_ret = "float";
+    	break;
+      case 2:
+    	_ret = "boolean";
+    	break;
+      case 3:
+    	_ret = "boolean";
+    	break;
       case 4:
         _ret = ((Identifier) n.f0.choice).f0.tokenImage;
+        break;
+      case 6:
+    	_ret = "int";
+    	break;
+      case 8:
+    	_ret = "boolean";
+    	break;
 //         _ret = n.f0.accept(this, argu);
       }
       n.f0.accept(this, argu);
