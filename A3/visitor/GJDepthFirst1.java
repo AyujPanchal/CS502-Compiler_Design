@@ -67,6 +67,7 @@ public class GJDepthFirst1<R,A> implements GJVisitor<R,A> {
 	   return "tmp" + tmpCount++;
    }
    String exp = "";
+   String Classlabel = "";
    Map<String,Map<String,String>> topass=new HashMap<String,Map<String,String>>();
    Map<String,String> classvar=new HashMap<String,String>();
    Map<String,String> methodvar=new HashMap<String,String>();
@@ -112,6 +113,7 @@ public class GJDepthFirst1<R,A> implements GJVisitor<R,A> {
       R _ret=null;
       method=0;
       String klassName = (String) n.f1.accept(this, argu);
+      Classlabel = klassName;
       String argsName = (String) n.f11.accept(this, argu);
       code += "class " + klassName + " {\n" + "public static void main("
     		  + "String[] " + argsName + ") {\n";
@@ -154,6 +156,7 @@ public class GJDepthFirst1<R,A> implements GJVisitor<R,A> {
       R _ret=null;
       latclass=n.f1.f0.tokenImage;
       String klassName = (String) n.f1.accept(this, argu);
+      Classlabel = klassName;
       code += "class " + klassName + "{\n";
       System.out.println(code);
       code = "";
@@ -185,6 +188,7 @@ public class GJDepthFirst1<R,A> implements GJVisitor<R,A> {
       R _ret=null;
       latclass=n.f1.f0.tokenImage;
       String klassName1 = (String) n.f1.accept(this, argu);
+      Classlabel = klassName1;
       String klassName2 = (String) n.f3.accept(this, argu);
       code += "class " + klassName1 + " extends " + klassName2 + "{\n" ;
       System.out.println(code);
@@ -905,12 +909,12 @@ public class GJDepthFirst1<R,A> implements GJVisitor<R,A> {
    public R visit(ThisExpression n, A argu) {
       R _ret=null;
       String tmp=newTemp();
-//      code+=tmp+" = "+n.f0.tokenImage+" ;\n";
+      code+=tmp+" = this;\n";
       if(method==1){
-          methodvar.put(tmp,ptype);
+          methodvar.put(tmp,Classlabel);
          }
-         else classvar.put(tmp,ptype);
-      _ret = (R)n.f0.tokenImage;
+         else classvar.put(tmp,Classlabel);
+      _ret = (R)tmp;
 //      ptype=latclass;
       return _ret;
    }
@@ -983,7 +987,7 @@ public class GJDepthFirst1<R,A> implements GJVisitor<R,A> {
       R _ret=null;
       String tmp = newTemp();
       String tmp2 = (String) n.f1.accept(this, argu);
-      code += tmp + " = " + "(" + tmp2 + ");\n";
+//      code += tmp + " = " + "(" + tmp2 + ");\n";
       if(method==1){
           methodvar.put(tmp,ptype);
          }

@@ -40,7 +40,11 @@ public class DepthFirstVisitor implements Visitor {
    //
    // User-generated visitor methods below
    //
-
+   Set<String> cfg = new HashSet<String>();
+   Set<String> cfg1 = new HashSet<String>();
+   String AssignmentLabel = "";
+   boolean isConstant=true;
+   boolean isField=false;
    /**
     * f0 -> MainClass()
     * f1 -> ( TypeDeclaration() )*
@@ -113,7 +117,9 @@ public class DepthFirstVisitor implements Visitor {
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
+      isField=true;
       n.f3.accept(this);
+      isField=false;
       n.f4.accept(this);
       n.f5.accept(this);
    }
@@ -134,7 +140,9 @@ public class DepthFirstVisitor implements Visitor {
       n.f2.accept(this);
       n.f3.accept(this);
       n.f4.accept(this);
+      isField=true;
       n.f5.accept(this);
+      isField=false;
       n.f6.accept(this);
       n.f7.accept(this);
    }
@@ -166,7 +174,8 @@ public class DepthFirstVisitor implements Visitor {
     * f12 -> "}"
     */
    public void visit(MethodDeclaration n) {
-      n.f0.accept(this);
+      cfg.add(n.f10.f0.tokenImage);
+	  n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
       n.f3.accept(this);
@@ -179,6 +188,8 @@ public class DepthFirstVisitor implements Visitor {
       n.f10.accept(this);
       n.f11.accept(this);
       n.f12.accept(this);
+      cfg.clear();
+      cfg1.clear();
    }
 
    /**
@@ -283,10 +294,14 @@ public class DepthFirstVisitor implements Visitor {
     * f3 -> ";"
     */
    public void visit(AssignmentStatement n) {
+	  AssignmentLabel = n.f0.f0.tokenImage;
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
       n.f3.accept(this);
+      if(AssignmentLabel!="") {
+    	  cfg1.add(n.f0.f0.tokenImage);
+      }
    }
 
    /**
@@ -299,6 +314,7 @@ public class DepthFirstVisitor implements Visitor {
     * f6 -> ";"
     */
    public void visit(ArrayAssignmentStatement n) {
+      cfg.add(n.f5.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -306,6 +322,7 @@ public class DepthFirstVisitor implements Visitor {
       n.f4.accept(this);
       n.f5.accept(this);
       n.f6.accept(this);
+      cfg1.add(n.f0.f0.tokenImage);
    }
 
    /**
@@ -323,6 +340,7 @@ public class DepthFirstVisitor implements Visitor {
       n.f3.accept(this);
       n.f4.accept(this);
       n.f5.accept(this);
+      cfg1.add(n.f0.f0.tokenImage);
    }
 
    /**
@@ -341,6 +359,7 @@ public class DepthFirstVisitor implements Visitor {
     * f4 -> Statement()
     */
    public void visit(IfthenStatement n) {
+	  cfg.add(n.f2.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -358,13 +377,28 @@ public class DepthFirstVisitor implements Visitor {
     * f6 -> Statement()
     */
    public void visit(IfthenElseStatement n) {
+	  cfg.add(n.f2.f0.tokenImage);
+      Set<String> s=new HashSet<String>();
+      for(String ss:cfg) s.add(ss);
+      for(String ss:s) cfg.add(ss);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
       n.f3.accept(this);
       n.f4.accept(this);
+      for(int i=0; i<s.size();i++) {
+          cfg.remove(cfg.size()-1-i);    	  
+      }
+      s.clear();
+      for(String ss:cfg) s.add(ss);
+      for(String ss:s) cfg.add(ss);
       n.f5.accept(this);
+//      cfg.add("if");
+//      cfg.add("else");
       n.f6.accept(this);
+      for(int i=0; i<s.size();i++) {
+          cfg.remove(cfg.size()-1-i);    	  
+      }
    }
 
    /**
@@ -375,6 +409,7 @@ public class DepthFirstVisitor implements Visitor {
     * f4 -> Statement()
     */
    public void visit(WhileStatement n) {
+	  cfg.add(n.f2.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -390,6 +425,7 @@ public class DepthFirstVisitor implements Visitor {
     * f4 -> ";"
     */
    public void visit(PrintStatement n) {
+	  cfg.add(n.f2.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -403,9 +439,26 @@ public class DepthFirstVisitor implements Visitor {
     * f2 -> <SCOMMENT2>
     */
    public void visit(LivenessQueryStatement n) {
-      n.f0.accept(this);
+	  n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
+	  Vector<String> ss=new Vector<String>();
+      for(String s:cfg){
+         ss.add(s);
+      }
+      for(String s:cfg1) {
+    	  ss.remove(s);
+      }
+      Collections.sort(ss);
+      for(int i=0;i<ss.size()-1;i++){
+         System.out.print(ss.get(i)+",");
+      }
+      // System.out.println();
+      if(ss.size()>0) {
+    	  System.out.println(ss.get(ss.size()-1));
+      }
+      cfg.clear();
+      cfg1.clear();
    }
 
    /**
@@ -432,6 +485,8 @@ public class DepthFirstVisitor implements Visitor {
     * f2 -> Identifier()
     */
    public void visit(AndExpression n) {
+	  cfg.add(n.f0.f0.tokenImage);
+	  cfg.add(n.f2.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -443,7 +498,9 @@ public class DepthFirstVisitor implements Visitor {
     * f2 -> Identifier()
     */
    public void visit(OrExpression n) {
-      n.f0.accept(this);
+	  cfg.add(n.f0.f0.tokenImage);
+	  cfg.add(n.f2.f0.tokenImage);
+	  n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
    }
@@ -454,7 +511,9 @@ public class DepthFirstVisitor implements Visitor {
     * f2 -> Identifier()
     */
    public void visit(CompareExpression n) {
-      n.f0.accept(this);
+	  cfg.add(n.f0.f0.tokenImage);
+	  cfg.add(n.f2.f0.tokenImage);      
+	  n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
    }
@@ -465,7 +524,9 @@ public class DepthFirstVisitor implements Visitor {
     * f2 -> Identifier()
     */
    public void visit(neqExpression n) {
-      n.f0.accept(this);
+	  cfg.add(n.f0.f0.tokenImage);
+	  cfg.add(n.f2.f0.tokenImage);
+	  n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
    }
@@ -476,7 +537,12 @@ public class DepthFirstVisitor implements Visitor {
     * f2 -> Identifier()
     */
    public void visit(PlusExpression n) {
-      n.f0.accept(this);
+	  cfg.add(n.f0.f0.tokenImage);
+	  cfg.add(n.f2.f0.tokenImage);
+	  if(n.f0.f0.tokenImage == AssignmentLabel || n.f2.f0.tokenImage == AssignmentLabel) {
+		  AssignmentLabel = "";
+	  }
+	  n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
    }
@@ -487,7 +553,9 @@ public class DepthFirstVisitor implements Visitor {
     * f2 -> Identifier()
     */
    public void visit(MinusExpression n) {
-      n.f0.accept(this);
+	  cfg.add(n.f0.f0.tokenImage);
+	  cfg.add(n.f2.f0.tokenImage);
+	  n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
    }
@@ -498,6 +566,8 @@ public class DepthFirstVisitor implements Visitor {
     * f2 -> Identifier()
     */
    public void visit(TimesExpression n) {
+	  cfg.add(n.f0.f0.tokenImage);
+	  cfg.add(n.f2.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -509,6 +579,8 @@ public class DepthFirstVisitor implements Visitor {
     * f2 -> Identifier()
     */
    public void visit(DivExpression n) {
+	  cfg.add(n.f0.f0.tokenImage);
+	  cfg.add(n.f2.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -521,6 +593,8 @@ public class DepthFirstVisitor implements Visitor {
     * f3 -> "]"
     */
    public void visit(ArrayLookup n) {
+	  cfg.add(n.f0.f0.tokenImage);
+	  cfg.add(n.f2.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -533,6 +607,7 @@ public class DepthFirstVisitor implements Visitor {
     * f2 -> "length"
     */
    public void visit(ArrayLength n) {
+	  cfg.add(n.f0.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -547,6 +622,7 @@ public class DepthFirstVisitor implements Visitor {
     * f5 -> ")"
     */
    public void visit(MessageSend n) {
+	  cfg.add(n.f0.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -560,6 +636,7 @@ public class DepthFirstVisitor implements Visitor {
     * f1 -> ( ArgRest() )*
     */
    public void visit(ArgList n) {
+	  cfg.add(n.f0.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
    }
@@ -569,6 +646,7 @@ public class DepthFirstVisitor implements Visitor {
     * f1 -> Identifier()
     */
    public void visit(ArgRest n) {
+	  cfg.add(n.f1.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
    }
@@ -638,6 +716,7 @@ public class DepthFirstVisitor implements Visitor {
     * f4 -> "]"
     */
    public void visit(ArrayAllocationExpression n) {
+	  cfg.add(n.f3.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -663,6 +742,7 @@ public class DepthFirstVisitor implements Visitor {
     * f1 -> Identifier()
     */
    public void visit(NotExpression n) {
+	  cfg.add(n.f1.f0.tokenImage);
       n.f0.accept(this);
       n.f1.accept(this);
    }

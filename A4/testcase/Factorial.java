@@ -3,10 +3,11 @@ class Factorial {
         Fac mtTmp2;
         int mtTmp3;
         int mtTmp1;
+        int mtTmp5;
         mtTmp2 = new Fac();
         mtTmp3 = 10;
         /* PRINTLIVEVARIABLES */                     // OUTPUT : mtTmp2,mtTmp3
-        mtTmp1 = mtTmp2.ComputeFac(mtTmp3);
+        mtTmp1 = mtTmp2.ComputeFac(mtTmp3,mtTmp5);
         System.out.println(mtTmp1);
     }
 }
